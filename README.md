@@ -172,6 +172,36 @@ Then re-apply the Prod‑Kit overlay file set (next section).
 
 ### Upgrade the Prod‑Kit overlay (this repo)
 
+#### Option 1: Apply via `uv` (no manual copying)
+
+One-time (recommended for upgrades):
+
+```bash
+uvx --from git+https://github.com/3leches/prod-kit.git prodkit overlay --force
+```
+
+Persistent install:
+
+```bash
+uv tool install prod-kit --from git+https://github.com/3leches/prod-kit.git
+prodkit overlay --force
+```
+
+By default, `prodkit overlay` **skips** `.specify/memory/constitution.md` if it already exists (so
+you can merge manually). To overwrite it (dangerous):
+
+```bash
+prodkit overlay --force --force-constitution
+```
+
+To also apply the optional agent guidance docs:
+
+```bash
+prodkit overlay --force --with-claude-commands
+```
+
+#### Option 2: Copy/merge files manually
+
 Re-apply/merge these overlay files into your Spec‑Kit project (same paths):
 
 - `.specify/memory/constitution.md` (merge; keep your product-specific content)
