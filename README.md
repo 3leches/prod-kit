@@ -187,6 +187,24 @@ uv tool install prod-kit --from git+https://github.com/3leches/prod-kit.git
 prodkit overlay --force
 ```
 
+If the repo is private (or your environment can’t prompt for credentials) and you see an error like
+`could not read Username for 'https://github.com': terminal prompts disabled`, use SSH instead:
+
+```bash
+uvx --from git+ssh://git@github.com/3leches/prod-kit.git prodkit overlay --force
+```
+
+```bash
+uv tool install prod-kit --from git+ssh://git@github.com/3leches/prod-kit.git
+prodkit overlay --force
+```
+
+Alternatively, authenticate HTTPS via a token (avoid putting tokens in shell history):
+
+```bash
+GITHUB_TOKEN=... uv tool install prod-kit --from "git+https://$GITHUB_TOKEN@github.com/3leches/prod-kit.git"
+```
+
 By default, `prodkit overlay` **skips** `.specify/memory/constitution.md` if it already exists (so
 you can merge manually). To overwrite it (dangerous):
 
